@@ -188,6 +188,8 @@ header.nav.scrolled{
 .section-head p{ margin-top:16px; color:var(--muted); font-size:16px; max-width:52ch; }
 .section-pad{ padding:100px 0; }
 .collection-section{ padding-top:56px; }
+#collection{ padding-top:0; }
+#essentials{ padding-bottom:48px; }
 
 /* ---------- simple page intro (used on combo.html) ---------- */
 .page-intro{ padding:150px 0 10px; }
@@ -198,7 +200,7 @@ header.nav.scrolled{
 .page-intro .hero-actions{ margin-top:30px; }
 
 /* ---------- video gallery ---------- */
-.video-gallery{ margin-top:92px; }
+.video-gallery{ margin-top:48px; }
 .video-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; }
 .video-card{
   overflow:hidden; border:1px solid var(--line); border-radius:22px;
@@ -562,7 +564,7 @@ footer{ padding:0 0 60px; }
 @media (max-width:480px){
   .hero{ padding-top:92px; padding-bottom:40px; }
   .collection-section{ padding-top:40px; }
-  .video-gallery{ margin-top:72px; }
+  .video-gallery{ margin-top:48px; }
   .hero-actions{ width:100%; }
   .hero-actions .btn{ flex:1 1 100%; justify-content:center; }
   .section-pad{ padding:72px 0; }

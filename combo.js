@@ -136,6 +136,7 @@ const PRODUCT_IMAGES = {
 
 const productImg = id => PRODUCT_IMAGES[id] || `images/products/${id}.jpeg`;
 const reduceMotionSafe = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const INSTAGRAM_URL = 'https://www.instagram.com/avyra_maternitybagnepal/';
 
 function comboTotal(combo){
   const bag = bagById(combo.bagId);
@@ -174,7 +175,10 @@ function renderComboCards(){
   }).join('');
 
   wrap.querySelectorAll('.use-combo-btn').forEach(btn => {
-    btn.addEventListener('click', () => applyCombo(btn.dataset.comboId));
+    btn.addEventListener('click', () => {
+      applyCombo(btn.dataset.comboId);
+      window.open(INSTAGRAM_URL, '_blank', 'noopener');
+    });
   });
 }
 
