@@ -76,20 +76,44 @@ const PRODUCTS = [
 // above, so their totals stay accurate if you edit a price.
 const COMBOS = [
   {
+    id: 'starter',
+    name: 'The Essentials Starter Combo',
+    tagline: 'A ready-made bag covering all the everyday maternity and newborn basics.',
+    bagId: 'maternity-bag',
+    image: 'images/essential-combo.jpeg',
+    items: [
+      { id: 'mothers-panty', qty: 1 },
+      { id: 'mothers-bra', qty: 1 },
+      { id: 'leeto-bottle', qty: 1 },
+      { id: 'fruit-feeder-small', qty: 1 },
+      { id: 'socks-12', qty: 3 },
+      { id: 'diaper-pad', qty: 1 },
+      { id: 'towel', qty: 1 },
+      { id: 'pillow', qty: 1 },
+      { id: 'blanket-cap', qty: 1 },
+      { id: 'plastic-bottle', qty: 1 },
+      { id: 'baby-cloth-5pcs', qty: 1 },
+      { id: 'mother-baby-cloth-set-topi', qty: 1 },
+      { id: 'wrapper', qty: 1 },
+      { id: 'bib-10', qty: 3 },
+    ],
+  },
+  {
     id: 'signature',
     name: 'The Signature Newborn Combo',
     tagline: 'A maternity bag packed with our most-requested nursing and newborn essentials.',
     bagId: 'maternity-bag',
     image: 'images/cover-all.jpeg',
-    itemIds: ['mothers-bra', 'support-belt', 'breast-pad-disposable', 'nappy-10', 'baby-cloth-5pcs', 'thin-blanket', 'bottle-tall', 'care-kit'],
-  },
-  {
-    id: 'starter',
-    name: 'The Essentials Starter Combo',
-    tagline: 'A lighter, budget-friendly set covering the everyday basics.',
-    bagId: 'maternity-bag',
-    image: 'images/brown-maternity.jpeg',
-    itemIds: ['mothers-panty', 'diaper-pad', 'cap-12', 'socks-12', 'baby-gloves', 'bib-10', 'thermos-tall'],
+    items: [
+      { id: 'mothers-bra', qty: 1 },
+      { id: 'support-belt', qty: 1 },
+      { id: 'breast-pad-disposable', qty: 1 },
+      { id: 'nappy-10', qty: 1 },
+      { id: 'baby-cloth-5pcs', qty: 1 },
+      { id: 'thin-blanket', qty: 1 },
+      { id: 'bottle-tall', qty: 1 },
+      { id: 'care-kit', qty: 1 },
+    ],
   },
 ];
 
@@ -97,6 +121,8 @@ const COMBOS = [
 const productById = id => PRODUCTS.find(p => p.id === id);
 const bagById = id => BAGS.find(b => b.id === id);
 const fmt = n => 'Rs ' + n.toLocaleString('en-IN');
+// Normalize a combo's item list (strings or {id, qty}) to {id, qty} objects.
+const comboItems = combo => combo.items || (combo.itemIds || []).map(id => ({ id, qty: 1 }));
 
 // Maps each product id to the actual photo in /images. Add or correct a
 // filename here to change the image shown in the combo builder.
@@ -140,7 +166,7 @@ const INSTAGRAM_URL = 'https://www.instagram.com/avyra_maternitybagnepal/';
 
 function comboTotal(combo){
   const bag = bagById(combo.bagId);
-  return combo.itemIds.reduce((sum, id) => sum + productById(id).price, bag.price);
+  return comboItems(combo).reduce((sum, it) => sum + productById(it.id).price * it.qty, bag.price);
 }
 
 // ---------- state ----------
@@ -156,9 +182,10 @@ function renderComboCards(){
     const bag = bagById(combo.bagId);
     const total = comboTotal(combo);
     const rows = [`<li><span>${bag.name}</span><span>${fmt(bag.price)}</span></li>`]
-      .concat(combo.itemIds.map(id => {
-        const item = productById(id);
-        return `<li><span>${item.name}</span><span>${fmt(item.price)}</span></li>`;
+      .concat(comboItems(combo).map(it => {
+        const item = productById(it.id);
+        const label = it.qty > 1 ? `${item.name} × ${it.qty}` : item.name;
+        return `<li><span>${label}</span><span>${fmt(item.price * it.qty)}</span></li>`;
       }));
     return `
       <div class="combo-preset-card">
@@ -188,7 +215,7 @@ function applyCombo(comboId){
 
   selectedBagId = combo.bagId;
   PRODUCTS.forEach(p => { quantities[p.id] = 0; });
-  combo.itemIds.forEach(id => { quantities[id] = 1; });
+  comboItems(combo).forEach(it => { quantities[it.id] = it.qty; });
 
   renderBagOptions();
   PRODUCTS.forEach(p => syncItemUI(p.id));
