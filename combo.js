@@ -58,7 +58,7 @@ const PRODUCTS = [
   { id:'care-kit-deluxe', name:'Baby Care Kit (Deluxe Box)', price:750,  category:'diapering' },
 
   // ---- clothing & sleep ----
-  { id:'cap-12',           name:'Baby Caps (12 pcs)',        price:150,  category:'clothing' },
+  { id:'cap-12',           name:'Baby Caps (1 pc)',          price:150,  category:'clothing' },
   { id:'socks-12',         name:'Baby Socks (1 pair)',     price:150,  category:'clothing' },
   { id:'towel',            name:'Baby Towel',                price:700,  category:'clothing' },
   { id:'pillow',           name:'Baby Pillow',               price:500,  category:'clothing' },
@@ -105,14 +105,37 @@ const COMBOS = [
     bagId: 'maternity-bag',
     image: 'images/cover-all.jpeg',
     items: [
+      // mother essentials
+      { id: 'mothers-panty', qty: 3 },
       { id: 'mothers-bra', qty: 1 },
       { id: 'support-belt', qty: 1 },
       { id: 'breast-pad-disposable', qty: 1 },
-      { id: 'nappy-10', qty: 1 },
-      { id: 'baby-cloth-5pcs', qty: 1 },
-      { id: 'thin-blanket', qty: 1 },
+      { id: 'breast-pad-reusable', qty: 1 },
+      { id: 'maternity-baby-cloth-set', qty: 1 },
+      { id: 'mother-baby-cloth-set-topi', qty: 1 },
+      // feeding & bottles
+      { id: 'leeto-bottle', qty: 1 },
       { id: 'bottle-tall', qty: 1 },
+      { id: 'fruit-feeder-large', qty: 1 },
+      { id: 'teether', qty: 1 },
+      { id: 'thermos-short', qty: 1 },
+      // diapering, bath & care
+      { id: 'diaper-pad', qty: 1 },
+      { id: 'nappy-10', qty: 1 },
+      { id: 'chaya-brush', qty: 1 },
+      { id: 'ear-pick', qty: 1 },
       { id: 'care-kit', qty: 1 },
+      // clothing & sleep
+      { id: 'cap-12', qty: 3 },
+      { id: 'socks-12', qty: 3 },
+      { id: 'towel', qty: 1 },
+      { id: 'pillow', qty: 1 },
+      { id: 'wrapper', qty: 1 },
+      { id: 'blanket-cap', qty: 1 },
+      { id: 'thin-blanket', qty: 1 },
+      { id: 'baby-cloth-5pcs', qty: 1 },
+      { id: 'baby-gloves', qty: 3 },
+      { id: 'bib-10', qty: 3 },
     ],
   },
 ];
