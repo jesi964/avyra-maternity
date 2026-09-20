@@ -80,7 +80,7 @@ const COMBOS = [
     name: 'The Essentials Starter Combo',
     tagline: 'A ready-made bag covering all the everyday maternity and newborn basics.',
     bagId: 'maternity-bag',
-    image: 'images/essential-combo.jpeg',
+    image: 'images/baby-clothing.jpg',
     items: [
       { id: 'mothers-panty', qty: 1 },
       { id: 'mothers-bra', qty: 1 },
